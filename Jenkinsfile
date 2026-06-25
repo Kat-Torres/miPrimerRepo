@@ -5,19 +5,25 @@ pipeline {
 
         stage('Checkout') {
             steps {
-                echo 'Codigo obtenido desde GitHub'
+                checkout scm
+            }
+        }
+
+        stage('Restore') {
+            steps {
+                sh 'dotnet restore'
             }
         }
 
         stage('Build') {
             steps {
-                echo 'Compilando aplicacion'
+                sh 'dotnet build'
             }
         }
 
         stage('Test') {
             steps {
-                echo 'Ejecutando pruebas'
+                sh 'dotnet test'
             }
         }
     }
