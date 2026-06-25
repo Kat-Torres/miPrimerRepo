@@ -6,28 +6,11 @@ pipeline {
     }
 
     stages {
-
-        stage('Checkout') {
-            steps {
-                checkout scm
-            }
-        }
-
-        stage('Restore') {
-            steps {
-                sh 'dotnet restore'
-            }
-        }
-
         stage('Build') {
             steps {
-                sh 'dotnet build --configuration Release'
-            }
-        }
-
-        stage('Test') {
-            steps {
-                sh 'dotnet test --configuration Release --no-build'
+                sh 'dotnet restore'
+                sh 'dotnet build'
+                sh 'dotnet test'
             }
         }
     }
